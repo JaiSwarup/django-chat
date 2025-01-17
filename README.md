@@ -2,6 +2,8 @@
 
 This is a real-time chat application built using Django and Django Channels. The purpose of this project is to provide a platform where users can communicate with each other in real-time through web sockets.
 
+Deployed at 'https://jaiswarup.pythonanywhere.com/'
+
 ## Purpose
 
 The main purpose of this project is to demonstrate the use of Django Channels to implement real-time features in a Django application. It includes user authentication, real-time messaging, and a simple user interface for chatting.
