@@ -55,7 +55,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'chat',
     'users',
-    'django_bootstrap5',
 ]
 
 MIDDLEWARE = [
