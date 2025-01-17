@@ -1,0 +1,48 @@
+{% extends 'form.html' %} {% block form_action %}"{% url 'login' %}"
+{%endblock%} {% block form_title %}Sign Up{% endblock %} {%block form_content%}
+<div class="form-floating">
+  <input
+    type="email"
+    class="form-control"
+    id="floatingInputEmail"
+    name="email"
+    placeholder="Email"
+  />
+  <label for="floatingInputEmail">Email</label>
+</div>
+<div class="form-floating">
+  <input
+    type="text"
+    class="form-control"
+    id="floatingInputUsername"
+    name="username"
+    placeholder="Username"
+  />
+  <label for="floatingInputUsername">Username</label>
+</div>
+<div class="form-floating">
+  <input
+    type="password"
+    class="form-control"
+    id="floatingPassword"
+    name="password"
+    placeholder="Password"
+  />
+  <label for="floatingPassword">Password</label>
+</div>
+<div class="form-floating">
+  <input
+    type="password"
+    class="form-control"
+    id="floatingConfirmPassword"
+    name="confirm_password"
+    placeholder="Confirm Password"
+  />
+  <label for="floatingConfirmPassword">Confirm Password</label>
+</div>
+
+<button class="btn btn-primary w-100 py-2" type="submit">Sign Up</button>
+<div class="text-center link mt-3">
+  <a href="/">Already have an account? Login</a>
+</div>
+{% endblock %}

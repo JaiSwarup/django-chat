@@ -1,0 +1,119 @@
+{% extends 'base.html' %} {% block title %}Chat{% endblock %} {% block meta %}
+{% load static %}
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+/>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+/>
+<link rel="stylesheet" href="{% static 'styles.css' %}" />
+{% endblock %} {% block content %}
+
+<div class="container-fluid p-0 min-vh-100 d-flex">
+  <section
+    class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark"
+    style="width: 250px"
+  >
+    <div
+      href="/"
+      class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
+    >
+      <span class="fs-4">Chats</span>
+    </div>
+    <hr />
+    <ul class="nav nav-pills flex-column mb-auto">
+      {% for item in user_last_messages %}
+      <li class="nav-item">
+        <a
+          href="{% url 'chat_room' item.user.username %}"
+          class="nav-link text-light bg-teriary {% if item.user.username == room_name %} active {% endif %}"
+          aria-current="page"
+          data-id="{{ room_name }}"
+        >
+          <div class="d-flex align-items-center gap-3">
+            <img
+              src="https://ui-avatars.com/api/?name={{ item.user.username|urlencode }}&size=64&background=random"
+              alt="{{ item.user.username }}'s Profile Image"
+              class="profile-icon rounded-circle mr-3"
+              style="width: 1.8rem; height: 1.8rem; object-fit: cover"
+            />
+            <div class="w-100">
+              <div class="d-flex justify-content-between">
+                <strong class="text-truncate">
+                  {{ item.user.username|capfirst }}
+                </strong>
+                {% if item.last_message %}
+                <small class="text-nowrap timestamp">
+                  {{ item.last_message.timestamp|date:"H:i" }}</small
+                >
+                {% endif %}
+              </div>
+              <div>
+                {% if item.last_message %}
+                <small
+                  class="d-block text-truncate last-msg"
+                  style="max-width: 90%"
+                  id="last-message"
+                >
+                  {% if item.last_message.sender == request.user %} You:
+                  <!-- prettier-ignore -->
+                  {% endif %} {{ item.last_message.content|truncatewords:5 }}
+                </small>
+                {% else %}
+                <small class="">No messages yet</small>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+    <hr />
+    <div class="dropdown">
+      <a
+        href="#"
+        class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        <img
+          src="https://ui-avatars.com/api/?name={{ request.user.username|urlencode }}&size=64&background=random"
+          alt=""
+          width="32"
+          height="32"
+          class="rounded-circle me-2"
+        />
+        <strong>{{ request.user.username|title }}</strong>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+        <li>
+          <a class="dropdown-item" href="https://github.com/JaiSwarup/"
+            >Github</a
+          >
+        </li>
+        <li>
+          <a
+            class="dropdown-item"
+            href="https://www.linkedin.com/in/jai-swarup-19b250262/"
+            >Linkedin</a
+          >
+        </li>
+        <li><hr class="dropdown-divider" /></li>
+        <li>
+          <a class="dropdown-item text-danger" href="{% url 'logout' %}"
+            >Sign out</a
+          >
+        </li>
+      </ul>
+    </div>
+  </section>
+    {% block chat_content %}
+    <div class="col-9 d-flex flex-column justify-content-center align-items-center fs-3 text-center">
+      Start a new chat or select an existing chat to view messages
+    </div>
+    {% endblock %} {% endblock %}
+  </div>
+</div>

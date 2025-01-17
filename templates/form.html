@@ -1,0 +1,11 @@
+{% extends 'base.html' %} {% block content %}
+<main class="form-signin w-100 min-vh-100 m-auto">
+  <form method="post" action="{%block form_action %}{%endblock %}">
+    {% csrf_token %}
+    <h1 class="h3 mb-3 fw-normal">
+      {% block form_title %} Create Account {% endblock %}
+    </h1>
+    {% block form_content %} {% endblock %}
+  </form>
+</main>
+{% endblock %}
